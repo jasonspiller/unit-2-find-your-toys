@@ -13,9 +13,9 @@ Minimum Viable Product (MVP)
 - CRUD your own searches
 - select what sources you want to search
 - **APIs**
- - eBay
- - Amazon
- - Google
+-- eBay
+-- Amazon
+-- Google
 
 Resources
 ===
