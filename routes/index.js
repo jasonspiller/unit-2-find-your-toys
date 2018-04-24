@@ -2,10 +2,12 @@ var express = require('express'),
 		db			= require('../models')
 		app 		= express.Router();
 
+
 // home page
 app.get('/', function(req, res) {
   res.render('index', {title: 'Home Page'});
 });
+
 
 // get all searches
 app.get('/searches', function(req, res, next) {
@@ -21,10 +23,12 @@ app.get('/searches', function(req, res, next) {
   });
 });
 
+
 // catch all 404
 app.get('*', (req, res) => {
 	res.render('404', {title: '404'});
 });
+
 
 module.exports = app;
 
