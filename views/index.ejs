@@ -3,27 +3,31 @@
 
 <head><% include partials/head %></head>
 
-<body>
+<body class="pt-5">
 
 	<header><% include partials/header %></header>
 
 
 	<main>
 
-		<section>
+		<div class="container">
 
-			<h2><%= title %></h2>
+			<section>
 
-			<p>Something goes here...</p>
+				<h2><%= title %></h2>
 
-		</section>
+				<p>Something goes here...</p>
+
+			</section>
+
+		</div>
 
 	</main>
 
 
 	<footer><% include partials/footer %></footer>
 
-	<footer><% include partials/scripts %></footer>
+	<% include partials/scripts %>
 
 </body>
 </html>
