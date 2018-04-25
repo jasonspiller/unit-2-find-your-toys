@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><% include partials/head %></head>
+
+<body class="pt-5">
+
+	<header><% include partials/header %></header>
+
+
+	<main>
+
+		<div class="container">
+
+			<section>
+
+				<h2><%= title %></h2>
+
+				<% for(var i=0; i < results.length; i++) { %>
+					<p><%= results[i].searchString %></p>
+				<% } %>
+
+			</section>
+
+		</div>
+
+	</main>
+
+
+	<footer><% include partials/footer %></footer>
+
+	<% include partials/scripts %>
+
+</body>
+</html>

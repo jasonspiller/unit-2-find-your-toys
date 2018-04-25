@@ -1,36 +1,22 @@
-var express = require('express'),
-		db			= require('../models')
-		app 		= express.Router();
+var express 		= require('express'),
+		router 			= express.Router(),
+		controller 	= require('../controllers');
+
 
 
 // home page
-app.get('/', function(req, res) {
-  res.render('index', {title: 'Home Page'});
-});
+router.get('/', controller.home);
 
 
 // get all searches
-app.get('/searches', function(req, res, next) {
-
-	// get all todos
-  db.Search.find(function(err, searches){
-    if (err) {
-      console.log("DB error: " + err);
-      res.sendStatus(500);
-    }
-		console.log(searches);
-		res.json(searches);
-  });
-});
+router.get('/searches', controller.searches);
 
 
 // catch all 404
-app.get('*', (req, res) => {
-	res.render('404', {title: '404'});
-});
+router.get('*', controller.fourzerofour);
 
 
-module.exports = app;
+module.exports = router;
 
 
 // OLD ROUTES
