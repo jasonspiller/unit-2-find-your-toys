@@ -10,7 +10,7 @@ exports.home = function(req, res) {
 // get all searches
 exports.searches = function(req, res, next) {
 
-	// get all todos
+	// query the db
   db.Search.find(function(err, searches){
     if (err) {
       console.log('DB error: ' + err);
@@ -22,6 +22,23 @@ exports.searches = function(req, res, next) {
 		}
 		res.render('searches', data);
   });
+};
+
+
+// get all searches
+exports.google = function(req, res, next) {
+
+	console.log(process.env.GOOGLE_API_KEY);
+
+ 	var url = `https://www.googleapis.com/customsearch/v1?cx=016727189182641024167%3At9tcn00re6o&key=${process.env.GOOGLE_API_KEY}&q=Optimus+Prime`;
+
+	console.log(url);
+
+	// install request jspm_packages
+	// request(url, data, ?) {
+	//
+	// }
+
 };
 
 

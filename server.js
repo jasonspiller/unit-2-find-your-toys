@@ -3,6 +3,7 @@ var express = require('express'),
 		path 		= require('path'),
 		parser 	= require('body-parser'),
 		logger 	= require('morgan'),
+		dotenv 	= require('dotenv').config(),
 		app 		= express();
 
 // routes
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 
 //mLab port assignment

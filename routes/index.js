@@ -3,14 +3,14 @@ var express 		= require('express'),
 		controller 	= require('../controllers');
 
 
-
 // home page
 router.get('/', controller.home);
 
+// get all searches
+router.get('/api/searches', controller.searches);
 
 // get all searches
-router.get('/searches', controller.searches);
-
+router.post('/api/google', controller.google);
 
 // catch all 404
 router.get('*', controller.fourzerofour);
