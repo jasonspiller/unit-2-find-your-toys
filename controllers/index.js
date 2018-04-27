@@ -4,15 +4,15 @@ var db 			= require('../models'),
 
 // home page
 exports.home = function(req, res) {
-  res.render('index', {title: 'Home Page'});
+  res.render('index', {title: 'Search'});
 };
 
 
 // get all searches
-exports.searches = function(req, res, next) {
+exports.getSearches = function(req, res, next) {
 
 	// query the db
-  db.Search.find(function(err, searches){
+  db.Search.find(function(err, searches) {
     if (err) {
       console.log('DB error: ' + err);
       res.sendStatus(500);
@@ -26,23 +26,55 @@ exports.searches = function(req, res, next) {
 };
 
 
-// get all searches
+// save searches
+exports.saveSearches = function(req, res, next) {
+
+	console.log(req.body);
+
+	// var data = {
+	// 		title: 'Searches',
+	// 		results: [{
+	// 			description: req.body.description,
+	// 			searchString: req.body.search
+	// 		}]
+	// 	}
+	//
+
+	db.Search.create(req.body, function(err) {
+		if (err) {
+			console.log('DB error: ' + err);
+			res.sendStatus(500);
+		}
+
+		res.redirect('searches')
+	});
+};
+
+
+// make Google API call
 exports.google = function(req, res, next) {
 
- 	var strUrl = `https://www.googleapis.com/customsearch/v1?&cx=016727189182641024167%3At9tcn00re6o&key=${process.env.GOOGLE_API_KEY}&q=Optimus+Prime`;
+	console.log();
 
-	console.log(strUrl);
+	var strGoogleAPI 			= 'https://www.googleapis.com/customsearch/v1',
+			strGoogleAPIKey 	= process.env.GOOGLE_API_KEY,
+			strGoogleSearchID = '016727189182641024167:t9tcn00re6o',
+			strSearchString 	= req.body.searchInput;
+
+	// create Google API url
+ 	var strGoogleAPIUrl = `${strGoogleAPI}?key=${strGoogleAPIKey}&cx=${strGoogleSearchID}&q=${strSearchString}`;
+
+	console.log(strGoogleAPIUrl);
+	console.log(encodeURI(strGoogleAPIUrl));
 
 	// make request call
-	request(strUrl, { json: true }, (error, response, body) => {
+	request(encodeURI(strGoogleAPIUrl), { json: true }, (error, response, body) => {
 	  if(error) {
 			return console.log(error);
 		}
 
-		console.log(body);
-
 		var data = {
-			title: 'Searches',
+			title: 'Searched:',
 			results: body
 		}
 

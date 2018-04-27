@@ -9,4 +9,6 @@ const SearchSchema = new Schema({
 
 const Search = mongoose.model('Search', SearchSchema);
 
+// mongoose static methods
+
 module.exports = Search;

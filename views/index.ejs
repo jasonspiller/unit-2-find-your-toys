@@ -14,14 +14,20 @@
 
 			<section>
 
-				<h2><%= title %></h2>
+				<h2 ><%= title %></h2>
 
-				<form id="search">
-				  <div class="form-group">
-				    <label for="searchInput">Search</label>
-				    <input type="text" class="form-control" id="searchInput">
-				  </div>
-				  <button type="submit" class="btn btn-primary">Search</button>
+				<form id="search" action="/google" method="post">
+
+					<div class="form-row">
+					  <input name="searchInput" type="text" class="form-control form-control-lg" id="searchInput" required>
+						<small id="searchHelp" class="form-text text-muted">
+							Exclude a term - ex. -term. Exact phrase - ex. "exact phrase". One term or another - ex. term OR another.
+						</small>
+					</div>
+					<div class="form-row justify-content-center">
+					  <button type="submit" class="btn btn-primary btn-lg mt-3">Find Your Toys</button>
+					</div>
+
 				</form>
 
 			</section>
