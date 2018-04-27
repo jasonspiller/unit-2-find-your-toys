@@ -16,12 +16,16 @@
 
 				<h2><%= title %></h2>
 
-				<ol>
+				<ol class="list-group">
 					<% for(var i=0; i < results.length; i++) { %>
-						<li>
-							<span class="font-weight-bold">Description:</span> <%= results[i].description %>
+						<li class="list-group-item">
+							<form action="/searches/delete/:id" method="post">
+								<button class="btn btn-danger float-right ml-3" name="_id" value="<%= results[i]._id %>">Delete</button>
+							</form>
+							<button class="btn btn-warning float-right" name="<%= results[i]._id %>" data-toggle="modal" data-target="#updateSearchModal">Update</button>
+							<span class="font-weight-bold" class="description">Description:</span> <%= results[i].description %>
 							<br>
-							<span class="font-weight-bold">Search:</span> <%= results[i].searchString %>
+							<span class="font-weight-bold" class="search">Search:</span> <%= results[i].searchString %>
 						</li>
 					<% } %>
 				</ol>
@@ -38,6 +42,38 @@
 	<footer><% include partials/footer %></footer>
 
 	<% include partials/scripts %>
+
+
+	<!-- save search modal -->
+	<div class="modal fade" id="updateSearchModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="updateSearchModalLabel">Update Search</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form id="frmUpdateSearch" action="/searches/:id" method="POST">
+						<div class="form-group">
+							<label for="description" class="col-form-label">Description</label>
+							<input type="text" class="form-control" name="description" id="description" value="<%=  %>">
+						</div>
+						<div class="form-group">
+							<label for="inputSearch" class="col-form-label">Search</label>
+							<input type="text" class="form-control" name="searchString" id="searchString" value="<%=  %>">
+						</div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary" form="frmUpdateSearch">Update Search</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 
 </body>
 </html>

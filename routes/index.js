@@ -12,6 +12,12 @@ router.get('/searches', controller.getSearches);
 // save search
 router.post('/searches', controller.saveSearches);
 
+// update search
+router.put('/searches/:id', controller.updateSearch);
+
+// delete search
+router.post('/searches/delete/:id', controller.deleteSearch);
+
 // get all searches
 router.post('/google', controller.google);
 

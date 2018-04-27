@@ -29,17 +29,6 @@ exports.getSearches = function(req, res, next) {
 // save searches
 exports.saveSearches = function(req, res, next) {
 
-	console.log(req.body);
-
-	// var data = {
-	// 		title: 'Searches',
-	// 		results: [{
-	// 			description: req.body.description,
-	// 			searchString: req.body.search
-	// 		}]
-	// 	}
-	//
-
 	db.Search.create(req.body, function(err) {
 		if (err) {
 			console.log('DB error: ' + err);
@@ -47,6 +36,36 @@ exports.saveSearches = function(req, res, next) {
 		}
 
 		res.redirect('searches')
+	});
+};
+
+
+// save searches
+exports.updateSearch = function(req, res, next) {
+
+	// db.Search.update(req.body, function(err) {
+	// 	if (err) {
+	// 		console.log('DB error: ' + err);
+	// 		res.sendStatus(500);
+	// 	}
+
+		res.redirect('searches')
+
+};
+
+
+// save searches
+exports.deleteSearch = function(req, res, next) {
+
+	console.log(req.body);
+
+	db.Search.deleteOne(req.body, function(err) {
+		if (err) {
+			console.log('DB error: ' + err);
+			res.sendStatus(500);
+		}
+
+		res.redirect('/searches')
 	});
 };
 
