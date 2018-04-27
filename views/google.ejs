@@ -16,8 +16,10 @@
 
 				<h2><%= title %></h2>
 
-				<% for(var i=0; i < results.length; i++) { %>
-					<p><%= results[i].searchString %></p>
+				<h3><%= results.context.title  %></h3>
+
+				<% for(var i=0; i < results.items.length; i++) { %>
+					<p><%= results.items[i].title %></p>
 				<% } %>
 
 			</section>

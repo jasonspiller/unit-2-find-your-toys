@@ -1,4 +1,5 @@
-var db = require('../models');
+var db 			= require('../models'),
+		request = require('request');
 
 
 // home page
@@ -28,16 +29,27 @@ exports.searches = function(req, res, next) {
 // get all searches
 exports.google = function(req, res, next) {
 
-	console.log(process.env.GOOGLE_API_KEY);
+ 	var strUrl = `https://www.googleapis.com/customsearch/v1?&cx=016727189182641024167%3At9tcn00re6o&key=${process.env.GOOGLE_API_KEY}&q=Optimus+Prime`;
 
- 	var url = `https://www.googleapis.com/customsearch/v1?cx=016727189182641024167%3At9tcn00re6o&key=${process.env.GOOGLE_API_KEY}&q=Optimus+Prime`;
+	console.log(strUrl);
 
-	console.log(url);
+	// make request call
+	request(strUrl, { json: true }, (error, response, body) => {
+	  if(error) {
+			return console.log(error);
+		}
 
-	// install request jspm_packages
-	// request(url, data, ?) {
-	//
-	// }
+		console.log(body);
+
+		var data = {
+			title: 'Searches',
+			results: body
+		}
+
+		res.render('google', data);
+
+	});
+
 
 };
 

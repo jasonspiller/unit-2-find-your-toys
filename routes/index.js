@@ -7,10 +7,10 @@ var express 		= require('express'),
 router.get('/', controller.home);
 
 // get all searches
-router.get('/api/searches', controller.searches);
+router.get('/searches', controller.searches);
 
 // get all searches
-router.post('/api/google', controller.google);
+router.get('/google', controller.google);
 
 // catch all 404
 router.get('*', controller.fourzerofour);

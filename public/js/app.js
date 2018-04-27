@@ -1,6 +1,6 @@
 $(function() {
 
-	console.log(process.env.GOOGLE_API_KEY);
+	console.log();
 
 	$('#search').on('submit', function(e) {
 		e.preventDefault();
