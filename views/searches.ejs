@@ -14,7 +14,7 @@
 
 			<section>
 
-				<h2><%= title %></h2>
+				<h2 class="mb-4"><%= title %></h2>
 
 				<ol class="list-group">
 					<% for(var i=0; i < results.length; i++) { %>
@@ -22,7 +22,19 @@
 							<form action="/searches/delete/:id" method="post">
 								<button class="btn btn-danger float-right ml-3" name="_id" value="<%= results[i]._id %>">Delete</button>
 							</form>
-							<button class="btn btn-warning float-right" name="<%= results[i]._id %>" data-toggle="modal" data-target="#updateSearchModal">Update</button>
+							<form action="/searches/update" method="post">
+								<input type="hidden" name="_id" value="<%= results[i]._id %>">
+								<input type="hidden" name="description" value="<%= results[i].description %>">
+								<input type="hidden" name="searchString" value="<%= results[i].searchString %>">
+								<button class="btn btn-warning float-right ml-3">Update</button>
+							</form>
+							<form action="/google" method="post">
+								<input type="hidden" name="_id" value="<%= results[i]._id %>">
+								<input type="hidden" name="description" value="<%= results[i].description %>">
+								<input type="hidden" name="searchString" value="<%= results[i].searchString %>">
+								<input type="hidden" name="existing" value="true">
+								<button class="btn btn-primary float-right">View</button>
+							</form>
 							<span class="font-weight-bold" class="description">Description:</span> <%= results[i].description %>
 							<br>
 							<span class="font-weight-bold" class="search">Search:</span> <%= results[i].searchString %>

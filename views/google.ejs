@@ -15,20 +15,29 @@
 			<section>
 
 				<!-- output search string and number of results -->
-				<h2>
+				<h2 class="mb-4">
 					<%= title %>
 					<%= results.queries.request[0].title.replace("Google Custom Search - ", "") %>
 					(<span class="font-italic"><%= results.searchInformation.formattedTotalResults %> Results</span>)
-					<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveSearchModal">Save Search</button>
+					<% if (existing) { %>
+						<form action="/searches/update" method="post">
+							<input type="hidden" name="_id" value="<%= _id %>">
+							<input type="hidden" name="description" value="<%= description %>">
+							<input type="hidden" name="searchString" value="<%= searchString %>">
+							<button class="btn btn-warning">Update</button>
+						</form>
+					<% } else { %>
+						<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saveSearchModal">Save Search</button>
+					<% }%>
 				</h2>
 
-				<div class="list-group">
+				<ol class="list-group">
 					<% for(var i=0; i < results.items.length; i++) { %>
-				  	<a href="<%= results.items[i].formattedUrl %>" class="list-group-item list-group-item-action">
-				    	<span class="font-weight-bold"><%= results.items[i].title %></span> - <%= results.items[i].snippet %>
-				  	</a>
+				  	 <li class="list-group-item">
+				    	<span class="font-weight-bold"><a href="<%= results.items[i].formattedUrl %>"><%= results.items[i].title %></a></span> - <%= results.items[i].snippet %>
+				  	</li>
 					<% } %>
-				</div>
+				</ol>
 
 			</section>
 
