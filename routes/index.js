@@ -43,10 +43,10 @@ router.use(session({
 }));
 
 // login page
-router.get('/login', controller.login);
+router.get('/signin', controller.signin);
 
 // user login
-router.post('/login', controller.loginUser);
+router.post('/signin', controller.signinUser);
 
 // signup
 router.get('/signup', controller.signup);
@@ -61,7 +61,7 @@ router.get('/profile', controller.profile);
 router.post('/sessions', controller.session);
 
 // log the user out
-router.get('/logout', controller.logout);
+router.get('/signout', controller.signout);
 
 
 

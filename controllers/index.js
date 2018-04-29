@@ -139,21 +139,21 @@ exports.google = function(req, res, next) {
 // USERS
 
 // login
-exports.login = function (req, res) {
-  res.render('login');
-});
+exports.signin = function (req, res) {
+  res.render('signin');
+};
 
 // user login
-exports.loginUser = function (req, res) {
+exports.signinUser = function (req, res) {
 	db.User.findOne({_id: req.session.userId}, function (err, currentUser) {
-		res.render('index', {user: currentUser})
+		res.render('profile', {user: currentUser})
 	});
-});
+};
 
 // signup
 exports.signup = function (req, res) {
   res.render('signup');
-});
+};
 
 // user signup
 exports.signupUser = function(req, res) {
@@ -161,17 +161,17 @@ exports.signupUser = function(req, res) {
 	db.User.createSecure(req.body.name, req.body.email, req.body.password, function (err, newUser) {
     res.json(newUser);
   });
-});
+};
 
 // user profile
-export.profile = function(req, res) {
+exports.profile = function(req, res) {
 	db.User.findOne({_id: req.session.userId}, function(err, currentUser) {
 		res.render('profile', {user: currentUser})
 	});
-});
+};
 
 // user sessions
-export.session = function (req, res) {
+exports.session = function (req, res) {
 
 	console.log(req.body);
 	// call authenticate function to check if password user entered is correct
@@ -189,15 +189,15 @@ export.session = function (req, res) {
 
 		res.json(existingUser);
 	});
-});
+};
 
 // user logout
-export.logout = function (req, res) {
+exports.signout = function (req, res) {
   // remove the session user id
   req.session.userId = null;
   // redirect to login (for now)
   res.redirect('/');
-});
+};
 
 
 

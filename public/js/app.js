@@ -6,6 +6,7 @@ $(function() {
 		e.preventDefault();
 
 		var formData = {
+			name:			$('input[name="name"]').val(),
 			email: 		$('input[name="email"]').val(),
 			password: $('input[name="password"]').val()
 		}
@@ -31,7 +32,7 @@ $(function() {
 	})
 
 
-	$('#login-form').on('submit', function(e) {
+	$('#signin-form').on('submit', function(e) {
 		e.preventDefault();
 
 		var formData = {
@@ -45,17 +46,17 @@ $(function() {
 			url				: ('/sessions'),
 			method		: 'POST',
 			data			: formData,
-			success		: loginSuccess,
-			fail			: loginFail
+			success		: signinSuccess,
+			fail			: signinFail
 		})
 
-		function loginSuccess() {
-			console.log('Login Succeeded');
+		function signinSuccess() {
+			console.log('Sign In Succeeded');
 			window.location = '/profile';
 		}
 
-		function loginFail() {
-			console.log('Login Failed');
+		function signinFail() {
+			console.log('Sign In Failed');
 		}
 
 	})
