@@ -9,3 +9,4 @@ if (process.env.NODE_ENV == "production") {
 
 // aggregate the models
 module.exports.Search = require("./search");
+module.exports.User = require("./user");
