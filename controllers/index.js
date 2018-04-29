@@ -2,11 +2,15 @@ var db 			= require('../models'),
 		request = require('request');
 
 
+
 // home page
 exports.home = function(req, res) {
   res.render('index', {title: 'Search'});
 };
 
+
+
+// SEARCHES
 
 // get all searches
 exports.getSearches = function(req, res, next) {
@@ -25,7 +29,6 @@ exports.getSearches = function(req, res, next) {
   });
 };
 
-
 // save searches
 exports.saveSearches = function(req, res, next) {
 
@@ -39,7 +42,6 @@ exports.saveSearches = function(req, res, next) {
 	});
 };
 
-
 // update search page
 exports.updateSearchPage = function(req, res, next) {
 
@@ -49,7 +51,6 @@ exports.updateSearchPage = function(req, res, next) {
 	}
 	res.render('updateSearch', data);
 };
-
 
 // save searches
 exports.updateSearch = function(req, res, next) {
@@ -89,7 +90,6 @@ exports.updateSearch = function(req, res, next) {
 	})
 };
 
-
 // delete search
 exports.deleteSearch = function(req, res, next) {
 
@@ -102,7 +102,6 @@ exports.deleteSearch = function(req, res, next) {
 		res.redirect('/searches')
 	});
 };
-
 
 // make Google API call
 exports.google = function(req, res, next) {
@@ -134,6 +133,72 @@ exports.google = function(req, res, next) {
 
 	});
 };
+
+
+
+// USERS
+
+// login
+exports.signin = function (req, res) {
+  res.render('signin');
+};
+
+// user login
+exports.signinUser = function (req, res) {
+	db.User.findOne({_id: req.session.userId}, function (err, currentUser) {
+		res.render('profile', {user: currentUser})
+	});
+};
+
+// signup
+exports.signup = function (req, res) {
+  res.render('signup');
+};
+
+// user signup
+exports.signupUser = function(req, res) {
+	// create user in the db
+	db.User.createSecure(req.body.name, req.body.email, req.body.password, function (err, newUser) {
+    res.json(newUser);
+  });
+};
+
+// user profile
+exports.profile = function(req, res) {
+	db.User.findOne({_id: req.session.userId}, function(err, currentUser) {
+		res.render('profile', {user: currentUser})
+	});
+};
+
+// user sessions
+exports.session = function (req, res) {
+
+	console.log(req.body);
+	// call authenticate function to check if password user entered is correct
+	db.User.authenticate(req.body.email, req.body.password, function (err, existingUser) {
+		if (err) {
+			console.log('Error is ' + err);
+		}
+		console.log('Start Existing User:');
+		console.log(existingUser);
+		console.log('End Existing User');
+
+		console.log(req.session);
+
+		req.session.userId = existingUser._id;
+
+		res.json(existingUser);
+	});
+};
+
+// user logout
+exports.signout = function (req, res) {
+  // remove the session user id
+  req.session.userId = null;
+  // redirect to login (for now)
+  res.redirect('/');
+};
+
 
 
 // catch all 404
