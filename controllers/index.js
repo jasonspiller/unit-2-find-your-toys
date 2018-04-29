@@ -43,8 +43,6 @@ exports.saveSearches = function(req, res, next) {
 // update search page
 exports.updateSearchPage = function(req, res, next) {
 
-	console.log(req.body);
-
 	var data = {
 		title: 'Update Search',
 		results: req.body
@@ -55,8 +53,6 @@ exports.updateSearchPage = function(req, res, next) {
 
 // save searches
 exports.updateSearch = function(req, res, next) {
-
-	console.log(req.body);
 
   db.Search.update({_id:req.body._id}, {description:req.body.description, searchString:req.body.searchString}, function(err, result) {
     if(err){
@@ -88,8 +84,6 @@ exports.updateSearch = function(req, res, next) {
 				existing: true
 			}
 
-			console.log(data);
-
 			res.render('google', data)
 		})
 	})
@@ -98,8 +92,6 @@ exports.updateSearch = function(req, res, next) {
 
 // delete search
 exports.deleteSearch = function(req, res, next) {
-
-	console.log(req.body);
 
 	db.Search.deleteOne(req.body, function(err) {
 		if (err) {
