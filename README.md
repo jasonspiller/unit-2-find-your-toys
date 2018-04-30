@@ -14,6 +14,12 @@ Minimum Viable Product (MVP)
 -- Google
 
 
+BROKEN
+===
+- User sign up creates user, but then just spins and eventually breaks (err: This page isn’t working. localhost didn’t send any data. ERR_EMPTY_RESPONSE)
+- Security warning on GitHub
+
+
 Next Steps
 ===
 - user sign up, login and log out
@@ -28,13 +34,11 @@ Next Steps
 Updates Needed
 ===
 - Logo for header
-- Update tagline
 - Use Sass for CSS
 - Update colors
 - Move results text to right of Results
 - align update button to title
 - Style Searched: and Search terms differently
-- Remove header at mobile size
 - Add more search hints and write better
 - Make Search button bigger
 - Update glow on field (Mac only?)
@@ -42,7 +46,9 @@ Updates Needed
 - Make update a Modal
 - Reverse Modal buttons
 - Add paging to the search results
-- Add form validation on everything
+- Need to look into mongoose statics and methods
+- refactor controllers to ES5
+
 
 
 Questions

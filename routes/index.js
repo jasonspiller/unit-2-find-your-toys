@@ -16,7 +16,7 @@ router.get('/', controller.home);
 router.get('/searches', controller.getSearches);
 
 // save search
-router.post('/searches', controller.saveSearches);
+router.post('/user/:id/search/:id', controller.saveSearch);
 
 // update search page
 router.post('/searches/update', controller.updateSearchPage);
@@ -27,8 +27,8 @@ router.post('/search/update/:id', controller.updateSearch);
 // delete search
 router.post('/searches/delete/:id', controller.deleteSearch);
 
-// search google
-router.post('/google', controller.google);
+// search results
+router.post('/results', controller.results);
 
 
 
@@ -56,6 +56,9 @@ router.post('/signup', controller.signupUser);
 
 // user profile page
 router.get('/profile', controller.profile);
+
+// user search page
+router.get('/user/searches', controller.userSearches);
 
 // post user informaiton
 router.post('/sessions', controller.session);

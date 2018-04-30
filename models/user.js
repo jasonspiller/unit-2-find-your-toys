@@ -1,6 +1,7 @@
 // create schema
-var mongoose 	= require('mongoose'),
-		bcrypt 		= require('bcrypt');
+var mongoose 		= require('mongoose'),
+		bcrypt 			= require('bcrypt');
+		searchModel	= require("./search");
 
 var Schema = mongoose.Schema;
 
@@ -9,10 +10,7 @@ var UserSchema = new Schema({
 	name: String,
 	email: String,
 	passwordDigest: String,
-	searches: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Search'
-  }]
+	searches: [searchModel.schema]
  });
 
 // create a new user with secure (hashed) password

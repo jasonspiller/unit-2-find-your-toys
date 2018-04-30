@@ -1,27 +1,20 @@
-/* Extra small devices (portrait phones, less than 576px) */
-/* No media query since this is the default in Bootstrap */
+@import url("//fonts.googleapis.com/css?family=Montserrat:300,800|Righteous");
+body {
+  background: #fff url("/img/concrete-seamless.png") top left repeat scroll;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px; }
+
+.dark-semi-transparent {
+  background-color: rgba(33, 37, 41, 0.5); }
+
 .display-4 {
-  font-size: 2.5rem;
-}
+  font-size: 2.5rem; }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-	.display-4 {
-	    font-size: 3.5rem;
-	}
-}
+  .display-4 {
+    font-size: 3.5rem; } }
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-
-}
-
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-
-}
-
 /* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-
-}

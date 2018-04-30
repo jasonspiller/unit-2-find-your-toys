@@ -62,7 +62,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frmSaveSearch" action="/searches" method="POST">
+					<form id="frmSaveSearch" action="/user/:id/search/:id" method="POST">
 						<div class="form-group">
 							<label for="description" class="col-form-label">Description</label>
 							<input type="text" class="form-control" name="description" id="description">
@@ -74,8 +74,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary" form="frmSaveSearch">Save Search</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,50 @@
+
+
+@import url('//fonts.googleapis.com/css?family=Montserrat:300,800|Righteous');
+
+/* variables */
+$font-display: 'Righteous, sans-serif';
+$font-body: 'Montserrat, sans-serif';
+$dark-gray: rgba(33,37,41,1);
+$dark-gray-semi: rgba(33,37,41,.5);
+
+body {
+	background: #fff url('/img/concrete-seamless.png') top left repeat scroll;
+	font-family: $font-body;
+	font-size: 16px;
+}
+
+.logo {
+	font-family: $font-display;
+  font-size: 2.5rem;
+}
+
+.logo span {
+	
+}
+
+.lead {
+	font-family: #$font-display;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.logo {
+	    font-size: 3.5rem;
+	}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

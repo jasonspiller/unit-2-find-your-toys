@@ -10,13 +10,109 @@ exports.home = function(req, res) {
 
 
 
+// USERS
+
+// login
+exports.signin = function (req, res) {
+	data = {
+		title: 'Sign In'
+	}
+  res.render('signin', data);
+};
+
+// user login
+exports.signinUser = function (req, res) {
+	db.User.findOne({_id: req.session.userId}, function (err, currentUser) {
+		res.render('profile', {user: currentUser})
+	});
+};
+
+// signup
+exports.signup = function (req, res) {
+	data = {
+		title: 'Sign Up'
+	}
+  res.render('signup', data);
+};
+
+// user signup
+exports.signupUser = function(req, res) {
+	// create user in the db
+	db.User.createSecure(req.body.name, req.body.email, req.body.password, function (err, signin) {
+		if (err) {
+			console.log('Create error: ' + err);
+			res.sendStatus(500);
+		}
+  });
+};
+
+// user profile
+exports.profile = function(req, res) {
+	db.User.findOne({_id: req.session.userId}, function(err, currentUser) {
+		res.render('profile', {user: currentUser})
+	});
+};
+
+
+// get all user searches
+exports.userSearches = function(req, res, next) {
+
+	// query the db
+  db.Search.find(function(err, searches) {
+    if (err) {
+      console.log('DB error: ' + err);
+      res.sendStatus(500);
+    }
+
+		db.User.findOne({_id: req.session.userId}, function (err, currentUser) {
+			if (err) {
+	      console.log('DB error: ' + err);
+	      res.sendStatus(500);
+	    }
+			var data = {
+				title: currentUser.name + '\'s Searches',
+				user: currentUser,
+				results: searches
+			}
+
+			res.render('searches', data);
+		});
+  });
+};
+
+// user sessions
+exports.session = function (req, res) {
+
+	console.log(req.body);
+	// call authenticate function to check if password user entered is correct
+	db.User.authenticate(req.body.email, req.body.password, function (err, existingUser) {
+		if (err) {
+			console.log('Error is ' + err);
+		}
+
+		req.session.userId = existingUser._id;
+
+		res.json(existingUser);
+	});
+};
+
+// user logout
+exports.signout = function (req, res) {
+  // remove the session user id
+  req.session.userId = null;
+  // redirect to login (for now)
+  res.redirect('/');
+};
+
+
+
 // SEARCHES
 
 // get all searches
 exports.getSearches = function(req, res, next) {
 
 	// query the db
-  db.Search.find(function(err, searches) {
+  db.User.find(function(err, searches) {
     if (err) {
       console.log('DB error: ' + err);
       res.sendStatus(500);
@@ -30,15 +126,17 @@ exports.getSearches = function(req, res, next) {
 };
 
 // save searches
-exports.saveSearches = function(req, res, next) {
+exports.saveSearch = function(req, res, next) {
 
-	db.Search.create(req.body, function(err) {
-		if (err) {
-			console.log('DB error: ' + err);
+	console.log(req.session.userId);
+
+	db.User.update({_id:req.session.userId}, {searches:req.body}, function(err, result) {
+		if(err){
+			console.log("Index Error: " + err);
 			res.sendStatus(500);
 		}
 
-		res.redirect('searches')
+		res.redirect('/user/searches')
 	});
 };
 
@@ -85,7 +183,7 @@ exports.updateSearch = function(req, res, next) {
 				existing: true
 			}
 
-			res.render('google', data)
+			res.render('results', data)
 		})
 	})
 };
@@ -104,7 +202,7 @@ exports.deleteSearch = function(req, res, next) {
 };
 
 // make Google API call
-exports.google = function(req, res, next) {
+exports.results = function(req, res, next) {
 
 	var strGoogleAPI 			= 'https://www.googleapis.com/customsearch/v1',
 			strGoogleAPIKey 	= process.env.GOOGLE_API_KEY,
@@ -129,80 +227,9 @@ exports.google = function(req, res, next) {
 			existing: req.body.existing
 		}
 
-		res.render('google', data);
+		res.render('results', data);
 
 	});
-};
-
-
-
-// USERS
-
-// login
-exports.signin = function (req, res) {
-	data = {
-		title: 'Sign In'
-	}
-  res.render('signin', data);
-};
-
-// user login
-exports.signinUser = function (req, res) {
-	db.User.findOne({_id: req.session.userId}, function (err, currentUser) {
-		res.render('profile', {user: currentUser})
-	});
-};
-
-// signup
-exports.signup = function (req, res) {
-	data = {
-		title: 'Sign Up'
-	}
-  res.render('signup', data);
-};
-
-// user signup
-exports.signupUser = function(req, res) {
-	// create user in the db
-	db.User.createSecure(req.body.name, req.body.email, req.body.password, function (err, newUser) {
-    res.json(newUser);
-  });
-};
-
-// user profile
-exports.profile = function(req, res) {
-	db.User.findOne({_id: req.session.userId}, function(err, currentUser) {
-		res.render('profile', {user: currentUser})
-	});
-};
-
-// user sessions
-exports.session = function (req, res) {
-
-	console.log(req.body);
-	// call authenticate function to check if password user entered is correct
-	db.User.authenticate(req.body.email, req.body.password, function (err, existingUser) {
-		if (err) {
-			console.log('Error is ' + err);
-		}
-		console.log('Start Existing User:');
-		console.log(existingUser);
-		console.log('End Existing User');
-
-		console.log(req.session);
-
-		req.session.userId = existingUser._id;
-
-		res.json(existingUser);
-	});
-};
-
-// user logout
-exports.signout = function (req, res) {
-  // remove the session user id
-  req.session.userId = null;
-  // redirect to login (for now)
-  res.redirect('/');
 };
 
 
