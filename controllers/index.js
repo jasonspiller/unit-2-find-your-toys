@@ -140,7 +140,10 @@ exports.google = function(req, res, next) {
 
 // login
 exports.signin = function (req, res) {
-  res.render('signin');
+	data = {
+		title: 'Sign In'
+	}
+  res.render('signin', data);
 };
 
 // user login
@@ -152,7 +155,10 @@ exports.signinUser = function (req, res) {
 
 // signup
 exports.signup = function (req, res) {
-  res.render('signup');
+	data = {
+		title: 'Sign Up'
+	}
+  res.render('signup', data);
 };
 
 // user signup

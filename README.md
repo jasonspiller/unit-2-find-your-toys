@@ -41,6 +41,8 @@ Updates Needed
 - Style Save Search Modal better
 - Make update a Modal
 - Reverse Modal buttons
+- Add paging to the search results
+- Add form validation on everything
 
 
 Questions

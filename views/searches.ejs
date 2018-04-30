@@ -14,30 +14,36 @@
 
 			<section>
 
-				<h2 class="mb-4"><%= title %></h2>
+				<h2 class="my-4"><%= title %></h2>
 
 				<ol class="list-group">
 					<% for(var i=0; i < results.length; i++) { %>
 						<li class="list-group-item">
-							<form action="/searches/delete/:id" method="post">
-								<button class="btn btn-danger float-right ml-3" name="_id" value="<%= results[i]._id %>">Delete</button>
-							</form>
-							<form action="/searches/update" method="post">
-								<input type="hidden" name="_id" value="<%= results[i]._id %>">
-								<input type="hidden" name="description" value="<%= results[i].description %>">
-								<input type="hidden" name="searchString" value="<%= results[i].searchString %>">
-								<button class="btn btn-warning float-right ml-3">Update</button>
-							</form>
-							<form action="/google" method="post">
-								<input type="hidden" name="_id" value="<%= results[i]._id %>">
-								<input type="hidden" name="description" value="<%= results[i].description %>">
-								<input type="hidden" name="searchString" value="<%= results[i].searchString %>">
-								<input type="hidden" name="existing" value="true">
-								<button class="btn btn-primary float-right">View</button>
-							</form>
-							<span class="font-weight-bold" class="description">Description:</span> <%= results[i].description %>
-							<br>
-							<span class="font-weight-bold" class="search">Search:</span> <%= results[i].searchString %>
+							<div class="row">
+								<div class="col-md-7">
+									<span class="font-weight-bold" class="description">Description:</span> <%= results[i].description %>
+									<br>
+									<span class="font-weight-bold" class="search">Search:</span> <%= results[i].searchString %>
+								</div>
+								<div class="col-md-5 align-middle text-center text-md-right mt-1">
+									<form action="/google" method="post" class="d-inline">
+										<input type="hidden" name="_id" value="<%= results[i]._id %>">
+										<input type="hidden" name="description" value="<%= results[i].description %>">
+										<input type="hidden" name="searchString" value="<%= results[i].searchString %>">
+										<input type="hidden" name="existing" value="true">
+										<button class="btn btn-primary">View</button>
+									</form>
+									<form action="/searches/update" method="post" class="d-inline">
+										<input type="hidden" name="_id" value="<%= results[i]._id %>">
+										<input type="hidden" name="description" value="<%= results[i].description %>">
+										<input type="hidden" name="searchString" value="<%= results[i].searchString %>">
+										<button class="btn btn-warning ml-2">Update</button>
+									</form>
+									<form action="/searches/delete/:id" method="post" class="d-inline">
+										<button class="btn btn-danger ml-2" name="_id" value="<%= results[i]._id %>">Delete</button>
+									</form>
+								</div>
+							</div>
 						</li>
 					<% } %>
 				</ol>

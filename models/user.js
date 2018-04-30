@@ -8,7 +8,11 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
 	name: String,
 	email: String,
-	passwordDigest: String
+	passwordDigest: String,
+	searches: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Search'
+  }]
  });
 
 // create a new user with secure (hashed) password

@@ -2,7 +2,7 @@ console.log('Hello Dave.');
 
 $(function() {
 
-	$('#signup-form').on('submit', function(e) {
+	$('#signupform').on('submit', function(e) {
 		e.preventDefault();
 
 		var formData = {
@@ -23,6 +23,7 @@ $(function() {
 
 		function postSuccess() {
 			console.log('Post Succeeded');
+			window.location = '/signin';
 		}
 
 		function postFail() {
@@ -32,7 +33,7 @@ $(function() {
 	})
 
 
-	$('#signin-form').on('submit', function(e) {
+	$('#signinForm').on('submit', function(e) {
 		e.preventDefault();
 
 		var formData = {
