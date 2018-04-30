@@ -8,6 +8,9 @@ body {
 a {
   color: #D54543; }
 
+a:hover, a:visited, a:active {
+  color: #D54543; }
+
 .dark-semi-transparent {
   background: rgba(33, 37, 41, 0.5); }
 
@@ -20,7 +23,16 @@ a {
   width: .9em; }
 
 .btn-primary {
-  background: #D54543; }
+  background: #D54543;
+  border-color: #d32828; }
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary.active {
+  color: #ffffff;
+  background-color: #d32828;
+  border-color: #D54543; }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {

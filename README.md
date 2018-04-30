@@ -33,18 +33,14 @@ Next Steps
 
 Updates Needed
 ===
-- Logo for header
-- Use Sass for CSS
 - Update colors
 - Move results text to right of Results
-- align update button to title
 - Style Searched: and Search terms differently
 - Add more search hints and write better
 - Make Search button bigger
 - Update glow on field (Mac only?)
 - Style Save Search Modal better
 - Make update a Modal
-- Reverse Modal buttons
 - Add paging to the search results
 - Need to look into mongoose statics and methods
 - refactor controllers to ES5
@@ -83,4 +79,4 @@ Resources
 - **Trello** - https://trello.com/b/vpn1piOn/unit-2-find-your-toys
 - **GitHub** - https://github.com/jasonspiller/unit-2-find-your-toys
 - **Heroku** - https://find-your-toys.herokuapp.com
-- **APIs** - TBD
+- **APIs** - https://cse.google.com/cse/all

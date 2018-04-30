@@ -5,9 +5,11 @@
 /* variables */
 $font-display: 'Righteous', sans-serif;
 $font-body: 'Montserrat', sans-serif;
-$action-red: #D54543;
+$action: #D54543;
+$action-dark: #d32828;
 $dark-gray: rgba(33,37,41,1);
 $dark-gray-semi: rgba(33,37,41,.5);
+
 
 body {
 	background: #fff url('/img/concrete-seamless.png') top left repeat scroll;
@@ -16,7 +18,11 @@ body {
 }
 
 a {
-	color: $action-red;
+	color: $action;
+}
+
+a:hover, a:visited, a:active {
+	color: $action;
 }
 
 .dark-semi-transparent {
@@ -34,9 +40,18 @@ a {
 }
 
 .btn-primary {
-	background: $action-red;
+	background: $action;
+	border-color: $action-dark;
 }
 
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary.active {
+  color: #ffffff;
+  background-color: $action-dark;
+  border-color: $action;
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
