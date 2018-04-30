@@ -43,6 +43,7 @@ exports.signupUser = function(req, res) {
 			console.log('Create error: ' + err);
 			res.sendStatus(500);
 		}
+		res.redirect('signin')
   });
 };
 
@@ -58,25 +59,18 @@ exports.profile = function(req, res) {
 exports.userSearches = function(req, res, next) {
 
 	// query the db
-  db.Search.find(function(err, searches) {
-    if (err) {
+	db.User.findOne({_id: req.session.userId}, function (err, currentUser) {
+		if (err) {
       console.log('DB error: ' + err);
       res.sendStatus(500);
     }
+		var data = {
+			title: currentUser.name + '\'s Searches',
+			user: currentUser,
+			results: currentUser.searches
+		}
 
-		db.User.findOne({_id: req.session.userId}, function (err, currentUser) {
-			if (err) {
-	      console.log('DB error: ' + err);
-	      res.sendStatus(500);
-	    }
-			var data = {
-				title: currentUser.name + '\'s Searches',
-				user: currentUser,
-				results: searches
-			}
-
-			res.render('searches', data);
-		});
+		res.render('searches', data);
   });
 };
 
@@ -112,7 +106,7 @@ exports.signout = function (req, res) {
 exports.getSearches = function(req, res, next) {
 
 	// query the db
-  db.User.find(function(err, searches) {
+  db.Search.find(function(err, searches) {
     if (err) {
       console.log('DB error: ' + err);
       res.sendStatus(500);
@@ -125,18 +119,46 @@ exports.getSearches = function(req, res, next) {
   });
 };
 
+
 // save searches
 exports.saveSearch = function(req, res, next) {
 
-	console.log(req.session.userId);
+	console.log(req.body);
 
-	db.User.update({_id:req.session.userId}, {searches:req.body}, function(err, result) {
+	db.Search.create(req.body, function(err, result) {
 		if(err){
 			console.log("Index Error: " + err);
 			res.sendStatus(500);
 		}
 
-		res.redirect('/user/searches')
+		res.redirect('/searches')
+	});
+};
+
+
+// save searches
+exports.saveUserSearch = function(req, res, next) {
+
+	console.log(req.body);
+	console.log(req.session);
+
+	db.User.findOne({_id:req.session.userId}, function(err, user) {
+		if(err){
+			console.log("Index Error: " + err);
+			res.sendStatus(500);
+		}
+
+		var newSearch = new db.Search (req.body)
+
+		console.log(newSearch);
+
+		user.searches.push(req.body);
+
+		console.log(user.searches);
+
+		user.save(function(err, updatedDocument){
+			res.redirect('/user/searches')
+		})
 	});
 };
 

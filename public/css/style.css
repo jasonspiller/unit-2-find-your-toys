@@ -1,18 +1,30 @@
-@import url("//fonts.googleapis.com/css?family=Montserrat:300,800|Righteous");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,800|Righteous");
+/* variables */
 body {
   background: #fff url("/img/concrete-seamless.png") top left repeat scroll;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px; }
 
-.dark-semi-transparent {
-  background-color: rgba(33, 37, 41, 0.5); }
+a {
+  color: #D54543; }
 
-.display-4 {
+.dark-semi-transparent {
+  background: rgba(33, 37, 41, 0.5); }
+
+.logo {
+  font-family: "Righteous", sans-serif;
   font-size: 2.5rem; }
+
+.logo .fa-search {
+  margin: 0 -5px -3px 2px;
+  width: .9em; }
+
+.btn-primary {
+  background: #D54543; }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  .display-4 {
+  .logo {
     font-size: 3.5rem; } }
 
 /* Medium devices (tablets, 768px and up) */

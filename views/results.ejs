@@ -20,7 +20,7 @@
 					<%= results.queries.request[0].title.replace("Google Custom Search - ", "") %>
 					(<span class="font-italic"><%= results.searchInformation.formattedTotalResults %> Results</span>)
 					<% if (existing) { %>
-						<form action="/searches/update" method="post">
+						<form action="/searches/update" method="post" class="d-inline">
 							<input type="hidden" name="_id" value="<%= _id %>">
 							<input type="hidden" name="description" value="<%= description %>">
 							<input type="hidden" name="searchString" value="<%= searchString %>">
@@ -62,7 +62,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="frmSaveSearch" action="/user/:id/search/:id" method="POST">
+					<form id="frmSaveSearch" action="/user/searches/save" method="post">
 						<div class="form-group">
 							<label for="description" class="col-form-label">Description</label>
 							<input type="text" class="form-control" name="description" id="description">

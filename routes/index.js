@@ -3,6 +3,13 @@ var express 		= require('express'),
 		router 			= express.Router(),
 		controller 	= require('../controllers');
 
+// session
+router.use(session({
+  saveUninitialized: true,
+  resave: true,
+  secret: 'SuperSecretCookie',
+  cookie: { maxAge: 30 * 60 * 1000 } // 30 minute cookie lifespan (in milliseconds)
+}));
 
 
 // home page
@@ -16,7 +23,10 @@ router.get('/', controller.home);
 router.get('/searches', controller.getSearches);
 
 // save search
-router.post('/user/:id/search/:id', controller.saveSearch);
+router.post('/searches/save', controller.saveSearch);
+
+// save search
+router.post('/user/searches/save', controller.saveUserSearch);
 
 // update search page
 router.post('/searches/update', controller.updateSearchPage);
@@ -33,14 +43,6 @@ router.post('/results', controller.results);
 
 
 // USER
-
-// session
-router.use(session({
-  saveUninitialized: true,
-  resave: true,
-  secret: 'SuperSecretCookie',
-  cookie: { maxAge: 30 * 60 * 1000 } // 30 minute cookie lifespan (in milliseconds)
-}));
 
 // login page
 router.get('/signin', controller.signin);

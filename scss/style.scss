@@ -1,10 +1,11 @@
 
 
-@import url('//fonts.googleapis.com/css?family=Montserrat:300,800|Righteous');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,800|Righteous');
 
 /* variables */
-$font-display: 'Righteous, sans-serif';
-$font-body: 'Montserrat, sans-serif';
+$font-display: 'Righteous', sans-serif;
+$font-body: 'Montserrat', sans-serif;
+$action-red: #D54543;
 $dark-gray: rgba(33,37,41,1);
 $dark-gray-semi: rgba(33,37,41,.5);
 
@@ -14,18 +15,28 @@ body {
 	font-size: 16px;
 }
 
+a {
+	color: $action-red;
+}
+
+.dark-semi-transparent {
+	background: $dark-gray-semi;
+}
+
 .logo {
 	font-family: $font-display;
   font-size: 2.5rem;
 }
 
-.logo span {
-	
+.logo .fa-search {
+	margin: 0 -5px -3px 2px;
+	width: .9em;
 }
 
-.lead {
-	font-family: #$font-display;
+.btn-primary {
+	background: $action-red;
 }
+
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
