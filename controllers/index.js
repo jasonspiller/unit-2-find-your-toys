@@ -136,11 +136,8 @@ exports.saveSearch = function(req, res, next) {
 };
 
 
-// save searches
+// save new search
 exports.saveUserSearch = function(req, res, next) {
-
-	console.log(req.body);
-	console.log(req.session);
 
 	db.User.findOne({_id:req.session.userId}, function(err, user) {
 		if(err){
@@ -172,12 +169,12 @@ exports.updateSearchPage = function(req, res, next) {
 	res.render('updateSearch', data);
 };
 
-// save searches
+// update search
 exports.updateSearch = function(req, res, next) {
 
-  db.Search.update({_id:req.body._id}, {description:req.body.description, searchString:req.body.searchString}, function(err, result) {
+	db.User.updateOne({_id: req.session.userId, 'searches._id': req.body._id}, { $set: { "searches.$.description":req.body.description, "searches.$.searchString":req.body.searchString } }, function(err, result) {
     if(err){
-			console.log("Index Error: " + err);
+			console.log("Update Error: " + err);
 			res.sendStatus(500);
     }
 
@@ -191,14 +188,16 @@ exports.updateSearch = function(req, res, next) {
 	 	var strGoogleAPIUrl = `${strGoogleAPI}?key=${strGoogleAPIKey}&cx=${strGoogleSearchID}&q=${strSearchString}`;
 
 		// make request call
-		request(encodeURI(strGoogleAPIUrl), { json: true }, (error, response, body) => {
-		  if(error) {
-				return console.log(error);
+		request(encodeURI(strGoogleAPIUrl), { json: true }, (err, response, results) => {
+		  if(err) {
+				console.log("API Error" + err);
 			}
+
+			console.log(results);
 
 			var data = {
 				title: 'Searched: ',
-				results: body,
+				results: results,
 				_id: req.body._id,
 				description: req.body.description,
 				searchString: req.body.searchString,
@@ -206,21 +205,20 @@ exports.updateSearch = function(req, res, next) {
 			}
 
 			res.render('results', data)
-		})
-	})
+		});
+	});
 };
 
 // delete search
 exports.deleteSearch = function(req, res, next) {
 
-	db.Search.deleteOne(req.body, function(err) {
-		if (err) {
-			console.log('DB error: ' + err);
+	db.User.update({_id:req.session.userId}, { $pull: {searches: req.body} }, function(err, user) {
+		if(err){
+			console.log("Update Error: " + err);
 			res.sendStatus(500);
 		}
-
-		res.redirect('/searches')
-	});
+		res.redirect('/user/searches')
+	})
 };
 
 // make Google API call

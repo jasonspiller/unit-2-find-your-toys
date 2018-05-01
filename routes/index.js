@@ -35,7 +35,7 @@ router.post('/searches/update', controller.updateSearchPage);
 router.post('/search/update/:id', controller.updateSearch);
 
 // delete search
-router.post('/searches/delete/:id', controller.deleteSearch);
+router.post('/searches/delete', controller.deleteSearch);
 
 // search results
 router.post('/results', controller.results);

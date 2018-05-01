@@ -39,8 +39,8 @@
 										<input type="hidden" name="searchString" value="<%= results[i].searchString %>">
 										<button class="btn btn-warning ml-2">Update</button>
 									</form>
-									<form action="/searches/delete/:id" method="post" class="d-inline">
-										<button class="btn btn-danger ml-2" name="_id" value="<%= results[i]._id %>">Delete</button>
+									<form action="/searches/delete" method="post" class="d-inline">
+										<button class="btn btn-dark ml-2" name="_id" value="<%= results[i]._id %>">Delete</button>
 									</form>
 								</div>
 							</div>
