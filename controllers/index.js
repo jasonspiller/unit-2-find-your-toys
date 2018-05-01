@@ -1,11 +1,16 @@
 var db 			= require('../models'),
-		request = require('request');
+		request = require('request')
 
 
 
 // home page
 exports.home = function(req, res) {
-  res.render('index', {title: 'Search'});
+	data = {
+		title: 'Search',
+		session: req.session
+	}
+
+  res.render('index', data);
 };
 
 
